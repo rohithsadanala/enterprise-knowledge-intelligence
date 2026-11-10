@@ -1,0 +1,19 @@
+# Optional extras — install only if you need them.
+# These pull in large model runtimes, so they are kept out of
+# requirements.txt to keep the default install light and offline-safe.
+
+# Real local embeddings + cross-encoder reranking (Hugging Face)
+# sentence-transformers>=2.7
+# torch>=2.2
+
+# Local Hugging Face chat models via LangChain
+# langchain-huggingface>=0.1
+# transformers>=4.40
+
+# Alternative vector store (ChromaDB)
+# chromadb>=0.5
+
+# DeepEval metrics (faithfulness / groundedness) — the eval harness
+# in this repo implements the same metrics natively and will use
+# DeepEval automatically when it is installed and an LLM is configured.
+# deepeval>=0.21

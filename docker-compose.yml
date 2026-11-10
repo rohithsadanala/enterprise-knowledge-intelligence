@@ -1,0 +1,29 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      # Offline defaults; override in a .env file for real models.
+      EKI_EMBEDDING_PROVIDER: ${EKI_EMBEDDING_PROVIDER:-fake}
+      EKI_LLM_PROVIDER: ${EKI_LLM_PROVIDER:-mock}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    volumes:
+      # Persist the index across restarts, and mount docs for ingestion.
+      - eki-data:/app/data
+      - ./docs:/app/docs:ro
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 5s
+      start-period: 10s
+
+  # Optional: a local embedding service is NOT required — the API embeds
+  # in-process (fake / sentence-transformers / OpenAI). If you want a
+  # separate embedding microservice, point EKI_EMBEDDING_PROVIDER at it
+  # and add the service here. pgvector is a supported deployment option
+  # for the vector store: run Postgres + pgvector and set
+  # EKI_VECTOR_STORE=pgvector (see README, "Deployment options").
+
+volumes:
+  eki-data:

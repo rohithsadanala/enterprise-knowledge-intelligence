@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+
+# Environment / secrets — never commit these
+.env
+*.pem
+*.key
+
+# Runtime data (local index + uploads)
+data/
+eval_data/eval_results.json
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
